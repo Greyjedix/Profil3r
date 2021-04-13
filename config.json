@@ -19,6 +19,10 @@
 
         "tiktok": {
             "format": "https://www.tiktok.com/@{permutation}"
+        },
+
+        "instagram": {
+            "format": "https://instagram.com/{permutation}"
         }
     }
 }

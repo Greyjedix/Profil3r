@@ -51,3 +51,6 @@ if __name__ == "__main__":
         # Twitter
         p4 = Process(target = profil3r.twitter)
         p4.start()
+        # Instagram
+        p5 = Process(target = profil3r.instagram)
+        p5.start()

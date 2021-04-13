@@ -2,7 +2,7 @@ import sys
 from itertools import chain, combinations, permutations
 import json
 from profil3r.modules.email import email
-from profil3r.modules.social import facebook, twitter, tiktok
+from profil3r.modules.social import facebook, twitter, tiktok, instagram
 
 class Core:
 
@@ -43,4 +43,9 @@ class Core:
     # TikTok
     def tiktok(self):
         self.result["tiktok"] = tiktok.TikTok(self.CONFIG, self.permutations_list).search()
+
+    # TikTok
+    def instagram(self):
+        self.result["instagram"] = instagram.Instagram(self.CONFIG, self.permutations_list).search()
+
 
