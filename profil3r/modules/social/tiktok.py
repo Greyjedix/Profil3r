@@ -23,7 +23,9 @@ class TikTok:
         return possible_usernames
 
     def search(self):
-        print(Colors.BOLD + Colors.OKGREEN + "\n----- TIKTOK -----\n" + Colors.ENDC)
+        tiktok_usernames = {
+            "accounts": []
+        }
 
         possible_usernames_list = self.possible_usernames()
 
@@ -31,10 +33,17 @@ class TikTok:
             try:
                 r = requests.get(username)
             except requests.ConnectionError:
-                print("failed to connect to t=TikTok")
+                print("failed to connect to TikTok")
             
             # If the account exists
             if r.status_code == 200:
-                print(Colors.BOLD + "[+] " + Colors.ENDC + Colors.HEADER  + username + Colors.ENDC)
-            
+                tiktok_usernames["accounts"].append({"value": username})
+
             time.sleep(self.delay)
+        
+        print("\n" + Colors.BOLD + "└──" + Colors.ENDC + Colors.OKGREEN + " TikTok ✔️" + Colors.ENDC)
+        
+        for account in tiktok_usernames["accounts"]:
+            print(Colors.BOLD + "   ├──" + Colors.ENDC + Colors.HEADER + account["value"] + Colors.ENDC)
+
+        return tiktok_usernames

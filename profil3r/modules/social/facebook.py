@@ -23,8 +23,9 @@ class Facebook:
         return possible_usernames
 
     def search(self):
-        print(Colors.BOLD + Colors.OKGREEN + "\n----- FACEBOOK -----\n" + Colors.ENDC)
-
+        facebook_usernames = {
+            "accounts": []
+        }
         possible_usernames_list = self.possible_usernames()
 
         for username in possible_usernames_list:
@@ -35,6 +36,12 @@ class Facebook:
             
             # If the account exists
             if r.status_code == 200:
-                print(Colors.BOLD + "[+] " + Colors.ENDC + Colors.HEADER  + username + Colors.ENDC)
-            
+                facebook_usernames["accounts"].append({"value": username})
             time.sleep(self.delay)
+        
+        print("\n" + Colors.BOLD + "└──" + Colors.ENDC + Colors.OKGREEN + " Facebook ✔️" + Colors.ENDC)
+
+        for account in facebook_usernames["accounts"]:
+            print(Colors.BOLD + "   ├──" + Colors.ENDC + Colors.HEADER + account["value"] + Colors.ENDC)
+
+        return facebook_usernames

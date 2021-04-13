@@ -8,6 +8,7 @@ class Email:
         # Have I been pwned API rate limit ( 1500 ms)
         self.delay = DELAY = 1500 / 1000
         # The 20 most common email domains, you can add more if you wish (in the config.jon file)
+        # The more domains you add, the longer it gets of course
         self.domains = config['plateform']['email']['domains']
         # {username}@{domain}
         self.format = config['plateform']['email']['format']
@@ -28,8 +29,9 @@ class Email:
 
     # We use the Have I Been Pwned API to search for breached emails
     def search(self):
-        print(Colors.BOLD + Colors.OKGREEN + "\n----- EMAILS -----\n" + Colors.ENDC)
-
+        emails_usernames = {
+            "accounts": []
+        }
         possible_emails_list = self.possible_emails()
 
         for possible_email in possible_emails_list:
@@ -37,13 +39,24 @@ class Email:
             
             # We pad the emails with spaces for better visibility
             longest_email_length = len(max(possible_emails_list))
-            email = possible_email.ljust(longest_email_length + 5)
-            
+
             # Not breached email
             if not pwned:
-               print(Colors.BOLD + "[+] " + Colors.ENDC + Colors.HEADER  + email + Colors.ENDC)
+                emails_usernames["accounts"].append({"value": possible_email, "breached": False})
             # Breached emails
             else:
-               print(Colors.BOLD + "[+] " + Colors.ENDC + Colors.HEADER  + email + Colors.ENDC + Colors.FAIL + Colors.BOLD + "[BREACHED]" + Colors.ENDC)
+                emails_usernames["accounts"].append({"value": possible_email, "breached": True})
 
             time.sleep(self.delay)
+        
+        print("\n" + Colors.BOLD + "└──" + Colors.ENDC + Colors.OKGREEN + " Email ✔️" + Colors.ENDC)
+
+        for account in emails_usernames["accounts"]:
+            email = account["value"].ljust(longest_email_length + 5)
+
+            if account["breached"]:
+                print(Colors.BOLD + "   ├──" + Colors.ENDC + Colors.HEADER + email + Colors.FAIL + "[BREACHED]" + Colors.ENDC)
+            else:
+                print(Colors.BOLD + "   ├──" + Colors.ENDC + Colors.HEADER + email + Colors.OKGREEN + "[SAFE]" + Colors.ENDC)
+
+        return emails_usernames

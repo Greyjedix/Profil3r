@@ -40,9 +40,11 @@ class Twitter:
                 return nitter_instance
 
     def search(self):
-        nitter_URL = self.get_nitter_instance()
+        twitter_usernames = {
+            "accounts" : []
+        }
 
-        print(Colors.BOLD + Colors.OKGREEN + "\n----- TWITTER -----\n" + Colors.ENDC)
+        nitter_URL = self.get_nitter_instance()
 
         possible_usernames_list = self.possible_usernames()
 
@@ -55,6 +57,13 @@ class Twitter:
             
             # If the account exists
             if r.status_code == 200:
-                print(Colors.BOLD + "[+] " + Colors.ENDC + Colors.HEADER  + username + Colors.ENDC)
-            
+                twitter_usernames["accounts"].append({"value": username})
+
             time.sleep(self.delay)
+        
+        print("\n" + Colors.BOLD + "└──" + Colors.ENDC + Colors.OKGREEN + " Twitter ✔️" + Colors.ENDC)
+
+        for account in twitter_usernames["accounts"]:
+            print(Colors.BOLD + "   ├──" + Colors.ENDC + Colors.HEADER + account["value"] + Colors.ENDC)
+
+        return twitter_usernames

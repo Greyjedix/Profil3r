@@ -12,6 +12,7 @@ class Core:
         # Items passed from the command line
         self.items = items
         self.permutations_list = []
+        self.result = {}
 
     def config():
         return self.CONFIG
@@ -28,17 +29,18 @@ class Core:
                     self.permutations_list.append("".join(perm))
     
     # Emails
-    def search_emails(self):
-        email.Email(self.CONFIG, self.permutations_list).search()
+    def emails(self):
+        self.result["emails"] = email.Email(self.CONFIG, self.permutations_list).search()
 
     # Facebook
-    def search_facebook(self):
-        facebook.Facebook(self.CONFIG, self.permutations_list).search()
-
+    def facebook(self):
+        self.result["facebook"] = facebook.Facebook(self.CONFIG, self.permutations_list).search()
+    
     # Twitter
-    def search_twitter(self):
-        twitter.Twitter(self.CONFIG, self.permutations_list).search()
+    def twitter(self):
+        self.result["twitter"] = twitter.Twitter(self.CONFIG, self.permutations_list).search()
 
     # TikTok
-    def search_tiktok(self):
-        tiktok.TikTok(self.CONFIG, self.permutations_list).search()
+    def tiktok(self):
+        self.result["tiktok"] = tiktok.TikTok(self.CONFIG, self.permutations_list).search()
+
