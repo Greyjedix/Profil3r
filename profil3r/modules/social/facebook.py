@@ -5,8 +5,8 @@ import time
 class Facebook:
 
     def __init__(self, config, permutations_list):
-        # 500 ms
-        self.delay = 500 / 1000
+        # 1000 ms
+        self.delay = config['plateform']['facebook']['rate_limit'] / 1000
         # https://facebook.com/{username}
         self.format = config['plateform']['facebook']['format']
         # facebook usernames are not case sensitive

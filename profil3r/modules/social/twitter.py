@@ -5,8 +5,8 @@ import time
 class Twitter:
 
     def __init__(self, config, permutations_list):
-        # 500 ms
-        self.delay = 500 / 1000
+        # 1000 ms
+        self.delay = config['plateform']['tiktok']['rate_limit'] / 1000
         # https://twitter.com/{username}
         self.format = config['plateform']['twitter']['format']
         self.permutations_list = permutations_list

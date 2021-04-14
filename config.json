@@ -2,6 +2,7 @@
     "report_path": "./reports/{}.json",
     "plateform": {
         "email": {
+            "rate_limit": 1500,
             "domains": [
                 "gmail.com",
                 "yahoo.com",
@@ -11,22 +12,27 @@
         },
 
         "facebook": {
+            "rate_limit": 1000,
             "format": "https://facebook.com/{permutation}"
         },
 
         "twitter": {
+            "rate_limit": 1000,
             "format": "https://twitter.com/{permutation}"
         },
 
         "tiktok": {
+            "rate_limit": 1000,
             "format": "https://www.tiktok.com/@{permutation}"
         },
 
         "instagram": {
+            "rate_limit": 1000,
             "format": "https://instagram.com/{permutation}"
         },
 
         "onlyfans": {
+            "rate_limit": 1000,
             "format": "https://onlyfans.com/{permutation}"
         }
     }

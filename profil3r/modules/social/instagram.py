@@ -6,7 +6,7 @@ class Instagram:
 
     def __init__(self, config, permutations_list):
         # 1000 ms
-        self.delay = 1000 / 1000
+        self.delay = config['plateform']['instagram']['rate_limit'] / 1000
         # https://instagram.com/{username}
         self.format = config['plateform']['instagram']['format']
         self.permutations_list = permutations_list

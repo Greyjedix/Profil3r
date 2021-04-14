@@ -5,8 +5,8 @@ import time
 class Onlyfans:
 
     def __init__(self, config, permutations_list):
-        # 500 ms
-        self.delay = 500 / 1000
+        # 1000 ms
+        self.delay = config['plateform']['onlyfans']['rate_limit'] / 1000
         # https://onlyfans.com/{username}
         self.format = config['plateform']['onlyfans']['format']
         # onlyfans usernames are not case sensitive

@@ -19,24 +19,21 @@ def print_logo():
 
 
 # Start the program
-if __name__ == "__main__":
-    print_logo()
+print_logo()
 
-    result = {}
+profil3r = core.Core(CONFIG, sys.argv[1:])
+profil3r.get_permutations()
 
-    profil3r = core.Core(CONFIG, sys.argv[1:])
-    profil3r.get_permutations()
+# Use command line arguments
+arguments = sys.argv[1:]
 
-    # Use command line arguments
-    arguments = sys.argv[1:]
+# No argument
+if not len(arguments):
+    print('''Profil3r is an OSINT tool that allows you to find potential profiles of a person on social networks, as well as their email addresses. This program also alerts you to the presence of a data leak for the found emails.
 
-    # No argument
-    if not len(arguments):
-        print('''Profil3r is an OSINT tool that allows you to find potential profiles of a person on social networks, as well as their email addresses. This program also alerts you to the presence of a data leak for the found emails.
+Usage : ./main.py <arguments>
+for exemple : ./main.py john doe
+            ./main.py john doe 67''')
 
-    Usage : ./main.py <arguments>
-    for exemple : ./main.py john doe
-                ./main.py john doe 67''')
-
-    else:
-        profil3r.run()
+else:
+    profil3r.run()

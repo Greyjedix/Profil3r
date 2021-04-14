@@ -6,7 +6,7 @@ class Email:
 
     def __init__(self, config, permutations_list):
         # Have I been pwned API rate limit ( 1500 ms)
-        self.delay = DELAY = 1500 / 1000
+        self.delay = DELAY = config['plateform']['email']['rate_limit'] / 1000
         # The 20 most common email domains, you can add more if you wish (in the config.jon file)
         # The more domains you add, the longer it gets of course
         self.domains = config['plateform']['email']['domains']

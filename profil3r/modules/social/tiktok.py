@@ -6,7 +6,7 @@ class TikTok:
 
     def __init__(self, config, permutations_list):
         # 1000 ms
-        self.delay = 1000 / 1000
+        self.delay = config['plateform']['tiktok']['rate_limit'] / 1000
         # https://www.tiktok.com/@{username}
         self.format = config['plateform']['tiktok']['format']
         # tiktok usernames are not case sensitive
