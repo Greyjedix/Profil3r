@@ -43,9 +43,4 @@ class Instagram:
 
             time.sleep(self.delay)
         
-        print("\n" + Colors.BOLD + "└──" + Colors.ENDC + Colors.OKGREEN + " Instagram ✔️" + Colors.ENDC)
-
-        for account in instagram_usernames["accounts"]:
-            print(Colors.BOLD + "   ├──" + Colors.ENDC + Colors.HEADER + account["value"] + Colors.ENDC)
-
         return instagram_usernames

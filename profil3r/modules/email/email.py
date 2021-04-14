@@ -37,9 +37,6 @@ class Email:
         for possible_email in possible_emails_list:
             pwned = pwnedpasswords.check(possible_email)
             
-            # We pad the emails with spaces for better visibility
-            longest_email_length = len(max(possible_emails_list))
-
             # Not breached email
             if not pwned:
                 emails_usernames["accounts"].append({"value": possible_email, "breached": False})
@@ -48,15 +45,5 @@ class Email:
                 emails_usernames["accounts"].append({"value": possible_email, "breached": True})
 
             time.sleep(self.delay)
-        
-        print("\n" + Colors.BOLD + "└──" + Colors.ENDC + Colors.OKGREEN + " Email ✔️" + Colors.ENDC)
-
-        for account in emails_usernames["accounts"]:
-            email = account["value"].ljust(longest_email_length + 5)
-
-            if account["breached"]:
-                print(Colors.BOLD + "   ├──" + Colors.ENDC + Colors.HEADER + email + Colors.FAIL + "[BREACHED]" + Colors.ENDC)
-            else:
-                print(Colors.BOLD + "   ├──" + Colors.ENDC + Colors.HEADER + email + Colors.OKGREEN + "[SAFE]" + Colors.ENDC)
 
         return emails_usernames

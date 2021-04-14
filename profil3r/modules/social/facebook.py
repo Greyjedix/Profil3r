@@ -39,9 +39,4 @@ class Facebook:
                 facebook_usernames["accounts"].append({"value": username})
             time.sleep(self.delay)
         
-        print("\n" + Colors.BOLD + "└──" + Colors.ENDC + Colors.OKGREEN + " Facebook ✔️" + Colors.ENDC)
-
-        for account in facebook_usernames["accounts"]:
-            print(Colors.BOLD + "   ├──" + Colors.ENDC + Colors.HEADER + account["value"] + Colors.ENDC)
-
         return facebook_usernames

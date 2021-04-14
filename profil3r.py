@@ -39,18 +39,4 @@ if __name__ == "__main__":
                 ./main.py john doe 67''')
 
     else:
-        # Emails
-        p1 = Process(target = profil3r.emails)
-        p1.start()
-        # Facebook
-        p2 = Process(target = profil3r.facebook)
-        p2.start()
-        # TikTok
-        p3 = Process(target = profil3r.tiktok)
-        p3.start()
-        # Twitter
-        p4 = Process(target = profil3r.twitter)
-        p4.start()
-        # Instagram
-        p5 = Process(target = profil3r.instagram)
-        p5.start()
+        profil3r.run()

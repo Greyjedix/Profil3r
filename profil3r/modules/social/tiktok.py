@@ -40,10 +40,5 @@ class TikTok:
                 tiktok_usernames["accounts"].append({"value": username})
 
             time.sleep(self.delay)
-        
-        print("\n" + Colors.BOLD + "└──" + Colors.ENDC + Colors.OKGREEN + " TikTok ✔️" + Colors.ENDC)
-        
-        for account in tiktok_usernames["accounts"]:
-            print(Colors.BOLD + "   ├──" + Colors.ENDC + Colors.HEADER + account["value"] + Colors.ENDC)
 
         return tiktok_usernames

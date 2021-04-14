@@ -60,10 +60,5 @@ class Twitter:
                 twitter_usernames["accounts"].append({"value": username})
 
             time.sleep(self.delay)
-        
-        print("\n" + Colors.BOLD + "└──" + Colors.ENDC + Colors.OKGREEN + " Twitter ✔️" + Colors.ENDC)
-
-        for account in twitter_usernames["accounts"]:
-            print(Colors.BOLD + "   ├──" + Colors.ENDC + Colors.HEADER + account["value"] + Colors.ENDC)
 
         return twitter_usernames
