@@ -14,7 +14,7 @@ def print_logo():
 
     ''' + Colors.ENDC)
 
-    print("v1.0.1\n")
+    print("v1.0.4\n")
     print("You can buy me a coffee at : https://www.buymeacoffee.com/givocefo\n")
 
 

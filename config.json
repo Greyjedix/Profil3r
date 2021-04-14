@@ -24,6 +24,10 @@
 
         "instagram": {
             "format": "https://instagram.com/{permutation}"
+        },
+
+        "onlyfans": {
+            "format": "https://onlyfans.com/{permutation}"
         }
     }
 }

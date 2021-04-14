@@ -3,6 +3,7 @@ from itertools import chain, combinations, permutations
 import json
 from profil3r.modules.email import email
 from profil3r.modules.social import facebook, twitter, tiktok, instagram
+from profil3r.modules.porn import onlyfans
 from profil3r.colors import Colors
 import multiprocessing
 import json
@@ -22,7 +23,8 @@ class Core:
             {"name": "facebook" , "method" : self.facebook},
             {"name": "twitter"  , "method" : self.twitter},
             {"name": "tiktok"   , "method" : self.tiktok},
-            {"name": "instagram", "method" : self.instagram}
+            {"name": "instagram", "method" : self.instagram},
+            {"name": "onlyfans" , "method" : self.onlyfans}
         ]
 
     def config():
@@ -69,6 +71,12 @@ class Core:
         # print results
         self.print_results("instagram")
 
+    # Onlyfans
+    def onlyfans(self):
+        self.result["onlyfans"] = onlyfans.Onlyfans(self.CONFIG, self.permutations_list).search()
+        # print results
+        self.print_results("onlyfans")
+
     def print_results(self, element):
         if element in self.result:
             element_results = self.result[element]
@@ -110,11 +118,8 @@ class Core:
     # You can modify th path in the config.json file
     def generate_report(self):
         # Create ./reports directory if not exists
-        try:
+        if not os.path.exists('reports'):
             os.makedirs('reports')
-        except OSError as e:
-            if e.errno != errno.EEXIST:
-                raise
 
         file_name = self.CONFIG["report_path"].format("_".join(self.items[:-1]))
         try:

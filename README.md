@@ -14,6 +14,21 @@ git clone https://github.com/Rog3rSm1th/Profil3r.git
 cd Profil3r/
 python3 setup.py install
 ```
+## Features
+
+#### Emails 
+- [x] Data leaks
+- [x] Emails
+
+#### Social
+- [x] Instagram
+- [x] Facebook
+- [x] Twitter
+- [x] Tiktok
+
+#### Porn
+- [x] Onlyfans
+
 ## Report 📖
 
 A report in JSON format is automatically generated in the `reports` folder
