@@ -14,6 +14,9 @@ git clone https://github.com/Rog3rSm1th/Profil3r.git
 cd Profil3r/
 python3 setup.py install
 ```
+## Report 📖
+
+A report in JSON format is automatically generated in the `reports` folder
 
 ## 📚 Example
 

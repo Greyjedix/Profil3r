@@ -5,6 +5,8 @@ from profil3r.modules.email import email
 from profil3r.modules.social import facebook, twitter, tiktok, instagram
 from profil3r.colors import Colors
 import multiprocessing
+import json
+import os
 
 class Core:
 
@@ -102,7 +104,25 @@ class Core:
                     # Safe account
                     else:
                         print(Colors.BOLD + "   ├──" + Colors.ENDC + Colors.HEADER + email + Colors.OKGREEN + "[SAFE]" + Colors.ENDC)
-                
+
+    # Generate a report in JSON format containing the collected data
+    # Report will be in "./reports/"
+    # You can modify th path in the config.json file
+    def generate_report(self):
+        # Create ./reports directory if not exists
+        try:
+            os.makedirs('reports')
+        except OSError as e:
+            if e.errno != errno.EEXIST:
+                raise
+
+        file_name = self.CONFIG["report_path"].format("_".join(self.items[:-1]))
+        try:
+            with open(file_name, 'w') as fp:
+                json.dump(self.result, fp)
+        except Exception as e:
+            print(e)
+
     def run(self):
         pool = multiprocessing.Pool()
 
@@ -110,3 +130,4 @@ class Core:
             pool.apply_async(module["method"])
         pool.close()
         pool.join()
+        self.generate_report()
