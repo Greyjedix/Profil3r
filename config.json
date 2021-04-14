@@ -1,5 +1,5 @@
 {   
-    "report_path": "./reports/{}",
+    "report_path": "./reports/{}.json",
     "plateform": {
         "email": {
             "domains": [

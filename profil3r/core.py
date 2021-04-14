@@ -5,9 +5,11 @@ from profil3r.modules.email import email
 from profil3r.modules.social import facebook, twitter, tiktok, instagram
 from profil3r.modules.porn import onlyfans
 from profil3r.colors import Colors
-import multiprocessing
+import threading
 import json
 import os
+
+result = {}
 
 class Core:
 
@@ -17,7 +19,6 @@ class Core:
         # Items passed from the command line
         self.items = items
         self.permutations_list = []
-        self.result = {}
         self.modules = [
             {"name": "email"    , "method" : self.email},
             {"name": "facebook" , "method" : self.facebook},
@@ -43,43 +44,43 @@ class Core:
     
     # Emails
     def email(self):
-        self.result["email"] = email.Email(self.CONFIG, self.permutations_list).search()
+        result["email"] = email.Email(self.CONFIG, self.permutations_list).search()
         # print results
         self.print_results("email")
 
     # Facebook
     def facebook(self):
-        self.result["facebook"] = facebook.Facebook(self.CONFIG, self.permutations_list).search()
+        result["facebook"] = facebook.Facebook(self.CONFIG, self.permutations_list).search()
         # print results
         self.print_results("facebook")
     
     # Twitter
     def twitter(self):
-        self.result["twitter"] = twitter.Twitter(self.CONFIG, self.permutations_list).search()
+        result["twitter"] = twitter.Twitter(self.CONFIG, self.permutations_list).search()
         # print results
         self.print_results("twitter")
 
     # TikTok
     def tiktok(self):
-        self.result["tiktok"] = tiktok.TikTok(self.CONFIG, self.permutations_list).search()
+        result["tiktok"] = tiktok.TikTok(self.CONFIG, self.permutations_list).search()
         # print results
         self.print_results("tiktok")
 
     # Instagram
     def instagram(self):
-        self.result["instagram"] = instagram.Instagram(self.CONFIG, self.permutations_list).search()
+        result["instagram"] = instagram.Instagram(self.CONFIG, self.permutations_list).search()
         # print results
         self.print_results("instagram")
 
     # Onlyfans
     def onlyfans(self):
-        self.result["onlyfans"] = onlyfans.Onlyfans(self.CONFIG, self.permutations_list).search()
+        result["onlyfans"] = onlyfans.Onlyfans(self.CONFIG, self.permutations_list).search()
         # print results
         self.print_results("onlyfans")
 
     def print_results(self, element):
-        if element in self.result:
-            element_results = self.result[element]
+        if element in result:
+            element_results = result[element]
             
             # Section title
 
@@ -124,15 +125,13 @@ class Core:
         file_name = self.CONFIG["report_path"].format("_".join(self.items[:-1]))
         try:
             with open(file_name, 'w') as fp:
-                json.dump(self.result, fp)
+                json.dump(result, fp)
         except Exception as e:
             print(e)
 
     def run(self):
-        pool = multiprocessing.Pool()
-
         for module in self.modules:
-            pool.apply_async(module["method"])
-        pool.close()
-        pool.join()
+            thread = threading.Thread(target=module["method"])
+            thread.start()
+            thread.join()
         self.generate_report()
